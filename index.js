@@ -9,10 +9,16 @@ function generateMarkdown({
   contribution,
   test,
   license,
+  github,
+  email,
 }) {
   const template = `# ${projectname}
 
+### License
+![img](https://img.shields.io/badge/license-${license}-green)
+
 ## Table of Contents
+
 
 * [Description](#description)
 
@@ -25,6 +31,9 @@ function generateMarkdown({
 * [Testing](#test)
 
 * [License](#license)
+
+* [Questions](#questions)
+
 
 ### Description
 ${description}
@@ -40,9 +49,16 @@ ${contribution}
 
 ### Testing
 ${test}
+
+### Questions
+
+[Github](https://github.com/${github})
+
+Email: ${email}
   
-### License
-${license}
+
+
+
 `;
   return template;
 }
@@ -59,11 +75,7 @@ inquirer
       message: "Type a Description?",
       name: "description",
     },
-    {
-      type: "input",
-      message: "Would you like a table of contents?",
-      name: "table",
-    },
+
     {
       type: "input",
       message: "Enter installation instructions.",
@@ -71,7 +83,7 @@ inquirer
     },
     {
       type: "input",
-      message: "Enter Usage infromation.",
+      message: "Enter Usage information.",
       name: "usage",
     },
     {
@@ -85,14 +97,20 @@ inquirer
       name: "test",
     },
     {
-      type: "checkbox",
+      type: "rawlist",
       message: "What licenses did you use?",
       name: "license",
-      choices: [
-        "![img](https://img.shields.io/badge/license-MIT-green)",
-        "badge2",
-        "badge3",
-      ],
+      choices: ["Apache2", "MIT", "Compliant"],
+    },
+    {
+      type: "input",
+      message: "Enter your GitHub.",
+      name: "github",
+    },
+    {
+      type: "email",
+      message: "Enter your email",
+      name: "email",
     },
   ])
 
