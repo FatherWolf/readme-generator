@@ -26,6 +26,6 @@ You run the script then you will be prompted a series of questions. You answer t
 
 ### Links
 
-[Repo](https://fatherwolf.github.io/Code-Quiz/)
+[Repo](https://github.com/FatherWolf/readme-generator)
 
 [Video](https://drive.google.com/file/d/1NI9VcbruUNo8iqnbb6HQL_m7w-2R1AtH/view?usp=sharing)
