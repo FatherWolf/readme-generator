@@ -1,55 +1,105 @@
-const fs = require("fs");
 const inquirer = require("inquirer");
+const fs = require("fs");
+
+function generateMarkdown({
+  projectname,
+  description,
+  installation,
+  usage,
+  contribution,
+  test,
+  license,
+}) {
+  const template = `# ${projectname}
+
+## Table of Contents
+
+* [Description](#description)
+
+* [Installation](#installation)
+
+* [Usage](#usage)
+
+* [Contributions](#contribution)
+
+* [Testing](#test)
+
+* [License](#license)
+
+### Description
+${description}
+
+### Installation
+${installation}
+
+### Usage
+${usage}
+
+### Contributions
+${contribution}
+
+### Testing
+${test}
+  
+### License
+${license}
+`;
+  return template;
+}
 
 inquirer
   .prompt([
     {
       type: "input",
       message: "What is your project name?",
-      name: "Projectname",
+      name: "projectname",
     },
     {
       type: "input",
       message: "Type a Description?",
-      name: "Description",
+      name: "description",
     },
     {
       type: "input",
       message: "Would you like a table of contents?",
-      name: "Table of Contents",
+      name: "table",
     },
     {
       type: "input",
       message: "Enter installation instructions.",
-      name: "Installation",
+      name: "installation",
     },
     {
       type: "input",
       message: "Enter Usage infromation.",
-      name: "Usage",
+      name: "usage",
     },
     {
       type: "input",
       message: "Who contributed to your project?",
-      name: "Contribution",
+      name: "contribution",
     },
     {
       type: "input",
       message: "Enter ways you tested application.",
-      name: "Test",
+      name: "test",
     },
     {
       type: "checkbox",
-      message: "What badges would you like?",
-      name: "Badges",
-      choices: ["badge1", "badge2", "badge3"],
+      message: "What licenses did you use?",
+      name: "license",
+      choices: [
+        "![img](https://img.shields.io/badge/license-MIT-green)",
+        "badge2",
+        "badge3",
+      ],
     },
   ])
+
   .then((response) => {
-    console.log(response);
-    fs.writeFile("README.md", JSON.stringify(response), "utf8", (error) => {
+    fs.writeFile("README.md", generateMarkdown(response), (error) => {
       if (error) {
-        console.log(error);
+        console.log("error");
       } else {
         console.log("success");
       }
